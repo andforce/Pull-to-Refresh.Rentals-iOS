@@ -9,6 +9,14 @@ Check this [project on Behance] (https://www.behance.net/gallery/20411445/Mobile
 
 <img src="https://d13yacurqjgara.cloudfront.net/users/125056/screenshots/1650317/realestate-pull_1-2-3.gif" alt="alt text" style="width:200;height:200">
 
+
+#Installing with [CocoaPods](https://cocoapods.org)
+
+```ruby
+pod 'Pull-to-Refresh.Rentals-IOS', '~> 1.0'
+```
+
+
 #Usage
 
 *For a working implementation, Have a look at the Sample Project - sample*
@@ -28,21 +36,19 @@ Check this [project on Behance] (https://www.behance.net/gallery/20411445/Mobile
     [self setupRefreshControl];
 }
 
--(void)setupRefreshControl{
-    
-    self.sunnyRefreshControl = [YALSunnyRefreshControl attachToScrollView:self.tableView
-                                                                  target:self
-                                                           refreshAction:@selector(sunnyControlDidStartAnimation)];
-    
+- (void)setupRefreshControl{
+    self.sunnyRefreshControl = [YALSunnyRefreshControl new];
+    [self.sunnyRefreshControl addTarget:self
+                                 action:@selector(sunnyControlDidStartAnimation)
+                       forControlEvents:UIControlEventValueChanged];
+    [self.sunnyRefreshControl attachToScrollView:self.tableView];
 }
 
--(void)sunnyControlDidStartAnimation{
-    
+- (void)sunnyControlDidStartAnimation{
     // start loading something
 }
 
--(IBAction)endAnimationHandle{
-    
+- (IBAction)endAnimationHandle{
     [self.sunnyRefreshControl endRefreshing];
 }
 
@@ -57,7 +63,7 @@ To customize drawables you can change:
 
 #Compatibility
   
-  * IOS 7,8
+  * IOS 7-9
   
 # Changelog
 
